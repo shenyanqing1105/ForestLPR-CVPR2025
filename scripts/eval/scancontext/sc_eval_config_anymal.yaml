@@ -1,0 +1,16 @@
+debug: False
+data:
+ dataset_folder: A_dataset/anymal
+ evalset_folder: A_dataset/anymal/testing
+eval:
+  eval_mode: 0
+  similarity: cosine
+  batch_size: 32
+  intra_files: [3-02.pickle] #intra
+  database_files: [Venman_evaluation_database.pickle, Karawatha_evaluation_database.pickle]
+  query_files: [Venman_evaluation_query.pickle, Karawatha_evaluation_query.pickle]
+  world_thresh: 10
+  time_thresh: 100
+  save_embeddings: '/A_dataset'
+  set_names: ['01','02','03','04']
+  make_graph_in_eval: False

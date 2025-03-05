@@ -1,0 +1,17 @@
+debug: False
+data:
+ dataset_folder: A_dataset/Wild-Places
+ evalset_folder: /A_dataset/Wild-Places/testing
+eval:
+  eval_mode: 0
+  similarity: cosine
+  batch_size: 32
+  intra_files: [V-03.pickle, V-04.pickle, K-03.pickle, K-04.pickle]
+  database_files: [Venman_evaluation_database.pickle, Karawatha_evaluation_database.pickle]
+  #Venman_evaluation_database.pickle, Venman_evaluation_query.pickle, 
+  query_files: [Venman_evaluation_query.pickle, Karawatha_evaluation_query.pickle]
+  world_thresh: 1
+  time_thresh: 600
+  save_embeddings: '/A_dataset'
+  set_names: ['01','02','03','04']
+  make_graph_in_eval: False
