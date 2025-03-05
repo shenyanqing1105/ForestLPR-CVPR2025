@@ -1,12 +1,10 @@
-
 # ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images
 
-The code is almost there. Don't ask, we don't know either. Good luck!😉 [kidding]
+😉The code is almost there. Don't ask, we don't know either. Good luck!😉 [kidding]
 
 ### TODO
 
-- arxiv version upload and insert the link
-- toc
+- [ ] upload arxiv version and insert the link belows
 
 source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images]()
 
@@ -14,7 +12,29 @@ source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests 
 
 ## Table of Contents
 
-[toc]
+- [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images](#forestlpr-lidar-place-recognition-in-forests-attentioning-multiple-bev-density-images)
+  - [TODO](#todo)
+  - [Table of Contents](#table-of-contents)
+  - [Environments](#environments)
+  - [Required Submap Data](#required-submap-data)
+  - [Dataset Structure](#dataset-structure)
+  - [File Structure](#file-structure)
+  - [Scripts](#scripts)
+    - [Pre-processing Point Clouds](#pre-processing-point-clouds)
+    - [Generating Pickle Files for Each Sequence](#generating-pickle-files-for-each-sequence)
+      - [__Training__ - wildplaces](#training---wildplaces)
+      - [__Testing__ - wildplaces](#testing---wildplaces)
+      - [__Testing__ - anymal, botanic](#testing---anymal-botanic)
+    - [Generate BEV Images and .npy files](#generate-bev-images-and-npy-files)
+  - [Model Training on Wild-Places](#model-training-on-wild-places)
+  - [Model Testing](#model-testing)
+  - [Baselines Testing](#baselines-testing)
+    - [3D Methods](#3d-methods)
+    - [2D Methods](#2d-methods)
+  - [Expected Performance](#expected-performance)
+  - [Visulizations](#visulizations)
+  - [Reference](#reference)
+  - [Acknowledgments](#acknowledgments)
 
 ## Environments
 
@@ -44,7 +64,7 @@ For [Wild-Places](https://www.123865.com/s/tp6jTd-TPFbh?提取码:s0u3), we prov
 Environment visualization
 ![environments](https://github.com/user-attachments/assets/e799831c-b655-49e8-b4dd-0c4ca00539dc)
 
-## dataset structure
+## Dataset Structure
 
 ```
 $_PATH_TO_DATASET/
@@ -100,7 +120,7 @@ $_PATH_TO_DATASET/
             └── V-04/
 ```
 
-## File structure
+## File Structure
 
 ```
 $HOME/ForestLPR
@@ -217,11 +237,11 @@ python generate_splits/testing_sets.py --dataset_root $_PATH_TO_DATASET --save_f
 
 This script will generate separate testing pickles for the inter-run and intra-run evaluation modes on each environment.  The **inter-run** pickles will produce query and database files for each testing environment, while the **intra-run** pickles will produce a separate training pickle for each individual point cloud sequence.
 
-##### __Testing__ - anymal, botanic
+#### __Testing__ - anymal, botanic
 
 For ANYmal and botanic, we also use the same way to generate pickle files, which are saved in dataset folders.
 
-#### Generate BEV Images and .npy files
+### Generate BEV Images and .npy files
 
 In `scripts/generate_splits/bevwp.py`, set `TOP_Z_MAX` and `TOP_Z_MIN` to crop the point cloud. `TOP_Z_DIVISION` refers to height interval of slices.
 
