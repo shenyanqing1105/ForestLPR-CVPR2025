@@ -3,19 +3,18 @@
 The code is almost there. Don't ask, we don't know either. Good luck!😉 [kidding]
 
 ### TODO
+
 - arxiv version upload and insert the link
 - toc
 - data upload and insert the link
 - checkpoint upload and insert the link
-- submodule, upload clear version of code
-source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images]() 
+  source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images]()
 
 <img src="https://github.com/user-attachments/assets/21c49ddd-6f88-4237-bfe9-ef78bcd0e39c" width="400px">
 
-
-
 ## Table of Contents
-[TOC]
+
+[toc]
 
 ## Environments
 
@@ -44,6 +43,7 @@ Environment visualization
 ![environments](https://github.com/user-attachments/assets/e799831c-b655-49e8-b4dd-0c4ca00539dc)
 
 ## dataset structure
+
 ```
 $_PATH_TO_DATASET/
 ├── anymal/		  # Dataset
@@ -99,6 +99,7 @@ $_PATH_TO_DATASET/
 ```
 
 ## File structure
+
 ```
 $HOME/ForestLPR
 ├── dataset/		  # Dataset
@@ -127,16 +128,13 @@ $HOME/ForestLPR
     |   |	├── mc_eval_config_anymal.yaml
     |   |	├── mc_eval_config_botanic.yaml
     |	|	└── mc_eval_config_wp.yaml
-    |	├── scan_context/
+    |	└── scan_context/
     |   |	├── sc_inter_sequence.py
     |   |	├── sc_intra_sequence.py
     |   |	├── sc_utils.py
     |   |	├── sc_eval_config_anymal.yaml
     |   |	├── sc_eval_config_botanic.yaml
-    |	|	└── sc_eval_config_wp.yaml
-    |   ├── inter_sequence.py    
-    |   ├── intra_sequence.py
-    |	└── utils.py
+    |		└── sc_eval_config_wp.yaml
     |	generate_splits/
     |   ├── bevwp.py    # dataloader of ForestLPR
     |   ├── ground_filter.py    # point-cloud preprocessing: ground segmentation and height offset removal
@@ -185,14 +183,16 @@ $HOME/TransLoc3D
 
 ```
 
-
 ## Scripts
+
 First check dataset file path in bevwp.py
 
 ### Pre-processing Point Clouds
+
 Run `scripts/generate_splits/ground_filter.py`, change `<ROOT_PATH>` and `<OUT_PATH>`
 
 Including ground segmentation and height offeset removal
+
 ### Generating Pickle Files for Each Sequence
 
 #### __Training__ - wildplaces
@@ -227,7 +227,6 @@ In `scripts/generate_splits/bevwp.py`, set `TOP_Z_MAX` and `TOP_Z_MIN` to crop t
 
 This script is also used for dataloader. When running the code first time, these files can be generated automatically. If there is already the .npy file, the dataset load function can skip the generation and directly load it from the file.
 
-
 ## Model Training on Wild-Places
 
 Run the following script to train and evaluate `ForestLPR` network. Specifically, it will train `ForestLPR` network and select a checkpoint that performs best Recall@5 on the validation set as the final model.
@@ -243,7 +242,9 @@ use `Deit` as model file, train single-BEV version
 ```
 python -W ignore train.py --img_size 480 480 --level 1 6 11 --agg gem --depth 12 --inputc 1 --features_dim 1024 --firsteval
 ```
+
 ## Model Testing
+
 Download the trained checkpoint on Wild-Places from XXX[url](), put it into `$HOME/ForestLPR/runs`, and run the following script to evaluate it.
 
 Change dataset file path in bevwp.py
@@ -271,7 +272,9 @@ python -W ignore eval.py --img_size 480 480 --cacheBatchSize 12 --resume ./runs/
 ```shell
 python -W ignore eval.py --img_size 480 480 --cacheBatchSize 12 --resume ./runs/forestlpr/model_best.pth.tar --level 1 6 11 --dataset intra --subset 3-02 --world_thresh 3 --time_thresh 100
 ```
+
 ## Baselines Testing
+
 Here we provide the Code of Baselines for testing Wild-Places, helping others reproduce the results to compare.
 
 [Transloc3D](https://www.dropbox.com/s/dotyuurc3n5m24w/TransLoc3D.pth?dl=0)
@@ -281,11 +284,8 @@ Here we provide the Code of Baselines for testing Wild-Places, helping others re
 [BevPlace]()
 
 ### 3D Methods
-Download the original code (or use git submodule) and the added `scripts` folder. The key files are `inter-sequence.py` and `intra-sequence.py`. Put the pretrained model into the `checkpoints` folder.
 
-
-
-
+Download the original code (or use git submodule) and the added  xx_ `script `folder. The key files are `inter-sequence.py `and `intra-sequence.py `. Put the pretrained model into the `checkpoints` folder. Move xx_ `script `folder. (e.g., move `transloc_scripts` into TransLoc3D, and rename it to `scripts`)
 
 **TransLoc3D** on Wild-Places, intra
 
@@ -295,6 +295,7 @@ Note: the `cfg.model_cfg.quantization_size` has been changed compared with repro
 cd scriptsig ../configs/transloc3d_baseline_cfg.py --databases <PATH_DATASET>/Wild-Places/testing/K-04.pickle --run_names Karawatha/K-04 --save_dir ../dataset/Wild-Places/testing/ --database_featu
 python intra-sequence.py --confres None --root <PATH_DATASET>/Wild-Places --quan_size 1
 ```
+
 `quan_size` is used to set `cfg.model_cfg.quantization_size`
 
 **Logg3D-Net** on Botanic, intra
@@ -355,7 +356,6 @@ python eval_bp.py --dataset intra --cacheBatchSize 2 --img_size 480 480 --featur
   </tr>
 </table>
 
-
 <table>
   <tr align="center">
     <th rowspan='2'>Type</th><th colspan='1'>Inter-V</th><th colspan='1'>Inter-K</th> <th colspan='1'>Validation</th> <th colspan='2'>Botanic05-3</th> <th colspan='2'>Botanic05-6</th>
@@ -368,14 +368,16 @@ python eval_bp.py --dataset intra --cacheBatchSize 2 --img_size 480 480 --featur
   </tr>
 </table>
 
-
 ## Visulizations
+
 The retrieval video on ANYmal dataset.
+
 <video width="315px" height="150px" src="https://github.com/user-attachments/assets/d6c128c9-4543-4967-bba6-fa707603c238.mp4"></video>
 
 ## Reference
 
 If you find the repo useful, please consider citing our paper:
+
 ```
 @inproceedings{forestlpr,
   title={ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images},
