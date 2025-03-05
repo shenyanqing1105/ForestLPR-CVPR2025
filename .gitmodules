@@ -5,8 +5,4 @@
 [submodule "MinkLoc3Dv2"]
 	path = MinkLoc3Dv2
 	url = https://github.com/jac99/MinkLoc3D
-	
-[submodule "LOGG3D-Net"]
-	path = LOGG3D-Net
-	url = https://github.com/csiro-robotics/LoGG3D-Net
 
