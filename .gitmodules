@@ -1,0 +1,11 @@
+[submodule "TransLoc3D"]
+	path = TransLoc3D
+	url = https://github.com/slothfulxtx/TransLoc3D
+	
+[submodule "MinkLoc3Dv2"]
+	path = TransLoc3D
+	url = https://github.com/jac99/MinkLoc3D
+	
+[submodule "LOGG3D-Net"]
+	path = TransLoc3D
+	url = https://github.com/csiro-robotics/LoGG3D-Net

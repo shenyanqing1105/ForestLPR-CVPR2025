@@ -40,14 +40,12 @@ We use two public datasets and one own-collected dataset: [Wild-Places](https://
 
 Additionally, in our work, we have processed the datasets into cropped point clouds [Cloud_normalized]() and BEV density images [download](), which is more convenient to test the BEV-based methods.
 
-All of the datasets are placed  in `$HOME/ForestLPR/dataset`.
-
 Environment visualization
 ![environments](https://github.com/user-attachments/assets/e799831c-b655-49e8-b4dd-0c4ca00539dc)
 
 ## dataset structure
 ```
-dataset/
+$_PATH_TO_DATASET/
 ├── anymal/		  # Dataset
 |   ├── anymal-3/ # Environment
 |	│   └── 02/   # Sequence
@@ -283,7 +281,11 @@ Here we provide the Code of Baselines for testing Wild-Places, helping others re
 [BevPlace]()
 
 ### 3D Methods
-Download the original code and the added `scripts` folder. The key files are `inter-sequence.py` and `intra-sequence.py`. Put the pretrained model into the `checkpoints` folder.
+Download the original code (or use git submodule) and the added `scripts` folder. The key files are `inter-sequence.py` and `intra-sequence.py`. Put the pretrained model into the `checkpoints` folder.
+
+
+
+
 
 **TransLoc3D** on Wild-Places, intra
 
