@@ -7,8 +7,6 @@
 	url = https://github.com/jac99/MinkLoc3D
 	
 [submodule "LOGG3D-Net"]
-	path = TransLoc3D
+	path = LOGG3D-Net
 	url = https://github.com/csiro-robotics/LoGG3D-Net
-[submodule "LoGG3D-Net"]
-	path = LoGG3D-Net
-	url = https://github.com/csiro-robotics/LoGG3D-Net
+
