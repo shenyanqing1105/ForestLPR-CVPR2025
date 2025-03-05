@@ -218,9 +218,6 @@ def get_recall(m, n, database_embeddings_sc, database_embeddings_rk, query_embed
                 break
         colours.append(c)
 
-        
-        
-
         if len(list(set(nn_ndx[0:threshold]).intersection(set(true_neighbors)))) > 0:
             one_percent_retrieved += 1
 
@@ -238,8 +235,6 @@ def get_recall(m, n, database_embeddings_sc, database_embeddings_rk, query_embed
 
 def print_eval_stats(stats):
     stat_str_list = []
-    import ipdb
-    ipdb.set_trace()
     for database_name in stats:
         print('Dataset: {}'.format(database_name))
         top1p = stats[database_name]['ave_one_percent_recall']

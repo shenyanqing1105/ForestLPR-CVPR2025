@@ -48,8 +48,7 @@ def evaluate(queries, databases, query_features, database_features, args):
         # Load run information, feature vectors
         temp_stats = evaluate_location(query_sets, database_sets, query_feat, database_feat, location, args)
         print(temp_stats)
-        import ipdb
-        ipdb.set_trace()
+
         stats.loc[location] = [temp_stats['ave_recall'][0], temp_stats['ave_recall'][4],temp_stats['ave_recall'][9],temp_stats['ave_one_percent_recall'], temp_stats['mrr']]
     stats.loc['Average'] = stats.mean(axis = 0)
     return stats

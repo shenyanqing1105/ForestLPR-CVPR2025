@@ -50,12 +50,10 @@ class EvalDataset:
     def __init__(self, dataset, dataset_folder):
         self.set = dataset
         self.dataset_folder = dataset_folder
-        # import ipdb
-        # ipdb.set_trace()
 
     def __len__(self):
         return len(self.set)
-    
+
     def get_pointcloud_tensor(self, fname):
         pcd = o3d.io.read_point_cloud(fname)
         # downpcd = pcd.voxel_down_sample(voxel_size=self.voxel_size)
@@ -89,13 +87,9 @@ def get_latent_vectors(model, dataset, dataset_folder, cfg):
     model.eval()
     
     for idx, batch in tqdm.tqdm(enumerate(eval_dataloader), desc = 'Getting Latent Vectors', total = math.ceil(len(eval_dataloader.dataset) / 16)):
-        # batch = {k:v.to('cuda') for k,v in batch.items()}
-        import ipdb
-        ipdb.set_trace()
         batch = batch.to('cuda')
         y = model(batch)
         gds = y[0].detach().cpu().numpy()
-        # gds = gds.reshape((-1,gd_dim))
         vectors.append(gds)
 
     vectors = np.concatenate(vectors, 0)

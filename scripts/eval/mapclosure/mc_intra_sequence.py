@@ -13,7 +13,6 @@ import pandas as pd
 from torchpack.utils.config import configs 
 from mc_utils import * 
 from collections import Counter
-from collections import deque
 import cv2
 
 
@@ -79,8 +78,7 @@ def evaluate_single_run():
     # Run evaluation on all eval datasets
     stats = pd.DataFrame(columns = ['F1max', 'R1', 'Sequence Length', 'Num. Revisits', 'Num. Correct Loc'])
     pickles = [pickle.load(open(os.path.join(configs.data.evalset_folder,i), 'rb')) for i in configs.eval.intra_files]
-    import ipdb
-    ipdb.set_trace()
+
     target_seq = {
         # 'V-03': pickles[0],
         # 'V-04': pickles[1],

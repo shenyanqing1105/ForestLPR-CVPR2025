@@ -40,7 +40,7 @@ def construct_query_and_database_sets(base_path, runs_folder, folders, pointclou
         test = {}
         df_locations = load_csv(os.path.join(base_path, runs_folder, folder, filename), os.path.join(runs_folder, folder, pointcloud_fols))
         for index, row in df_locations.iterrows():
-            pose = np.array(row[['x','y','z','qx','qy','qz','qw']])        
+            pose = np.array(row[['x','y','z','qx','qy','qz','qw']])
             row['timestamp'] = float(os.path.basename(row['filename'].replace('.pcd', ''))) 
             if p and check_in_test_set(row['easting'], row['northing'], p, []) == 'test':
                 test[len(test.keys())] = {'query': row['filename'], 'northing': row['northing'], 'easting': row['easting'], 'pose': pose, 'timestamp': row['timestamp']}
@@ -94,9 +94,6 @@ if __name__ == '__main__':
     # for anymal or botanic
     sub = '3-02'
     folders = sorted(os.listdir(os.path.join(args.dataset_root, sub)))
-    print('anymal or botanic')
-    import ipdb
-    ipdb.set_trace()
     construct_query_and_database_sets(
         base_path = args.dataset_root,
         runs_folder = sub,

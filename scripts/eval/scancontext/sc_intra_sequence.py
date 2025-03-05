@@ -83,8 +83,6 @@ def get_latent_vectors(t_set):
 
         if 0: # for statistical analysis
             count = count_ranges(xyz[:,2])
-            import ipdb
-            ipdb.set_trace()
             for key, value in dict(count).items():
                 if key in Dict:
                     Dict[key] += value
@@ -100,8 +98,6 @@ def evaluate_single_run():
     # Run evaluation on all eval datasets
     stats = pd.DataFrame(columns = ['F1max', 'R1', 'Sequence Length', 'Num. Revisits', 'Num. Correct Loc'])
     pickles = [pickle.load(open(os.path.join(configs.data.evalset_folder,i), 'rb')) for i in configs.eval.intra_files]
-    import ipdb
-    ipdb.set_trace()
     target_seq = {
         # 'VEN-03': pickles[0],
         # 'VEN-04': pickles[1],

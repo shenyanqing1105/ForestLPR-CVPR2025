@@ -246,8 +246,6 @@ def get_recall(m, n, database_embeddings_sc, database_embeddings_rk, query_embed
 
 def print_eval_stats(stats):
     stat_str_list = []
-    import ipdb
-    ipdb.set_trace()
     for database_name in stats:
         print('Dataset: {}'.format(database_name))
         top1p = stats[database_name]['ave_one_percent_recall']
@@ -295,68 +293,3 @@ if __name__ == "__main__":
     stats, mrr_grid, recall_1_grid = evaluate()
 
     save_str = print_eval_stats(stats)
-
-    # if sargs.ave_dir != None:
-
-    #     with open(os.path.join(configs.eval.save_grid_results, 'results.txt'), 'w') as f:
-    #         f.write(save_str) 
-
-    #     fig, axes = list(plt.subplots(1, len(mrr_grid)))
-    #     fig.set_size_inches(5 * len(mrr_grid), 5)
-    #     if len(mrr_grid) == 1:
-    #         axes = [axes]
-    #     else:
-    #         axes = list(axes)
-
-    #     for idx, k in enumerate(mrr_grid.keys()):
-    #         ax = axes[idx]
-    #         print(ax)
-    #         mrr = mrr_grid[k]
-
-    #         df_mrr = pd.DataFrame(columns=configs.eval.set_names)
-    #         for idx, name in enumerate(configs.eval.set_names):
-    #             df_mrr.loc[name] = mrr[idx]
-    #         df_mrr.to_csv(os.path.join(save_dir, f'mrr_grid_{k}.csv'))
-
-    #         ax = sns.heatmap(mrr, linewidth = 2.5, cmap = 'YlGn', annot = np.round(mrr, decimals = 1),
-    #                     fmt = '', annot_kws={"size": 20 }, cbar = False, square=True, ax = ax)
-
-    #         ax.set_title(f'MRR_{k}', fontsize=17)
-    #         ax.set_xticklabels(configs.eval.set_names, fontsize=17)
-    #         ax.set_yticklabels(configs.eval.set_names, fontsize=17)
-    #         ax.set_xlabel('Database', fontsize=17)
-    #         ax.set_ylabel('Query', fontsize=17)
-
-    #     plt.savefig(os.path.join(save_dir, f'mrr.png'), bbox_inches = 'tight',
-    #             pad_inches = 0.1, dpi = 300)
-        
-    #     # Recall@1
-    #     fig, axes = plt.subplots(1, len(recall_1_grid))
-    #     fig.set_size_inches(5 * len(mrr_grid), 5)
-    #     if len(mrr_grid) == 1:
-    #         axes = [axes]
-    #     else:
-    #         axes = list(axes)
-
-    #     for idx, k in enumerate(recall_1_grid.keys()):
-    #         ax = axes[idx]
-    #         r1 = recall_1_grid[k]
-
-    #         df_r1 = pd.DataFrame(columns=configs.eval.set_names)
-    #         for idx, name in enumerate(configs.eval.set_names):
-    #             df_r1.loc[name] = r1[idx]
-    #         df_r1.to_csv(os.path.join(save_dir, f'r1_grid_{k}.csv'))
-
-    #         ax = sns.heatmap(r1, linewidth = 2.5, cmap = 'YlGn', annot = np.round(r1, decimals = 1),
-    #                     fmt = '', annot_kws={"size": 20 }, cbar = False, square=True, ax = ax)
-
-    #         ax.set_title(f'r1_{k}', fontsize=17)
-    #         ax.set_xticklabels(configs.eval.set_names, fontsize=17)
-    #         ax.set_yticklabels(configs.eval.set_names, fontsize=17)
-    #         ax.set_xlabel('Database', fontsize=17)
-    #         ax.set_ylabel('Query', fontsize=17)
-
-    #     plt.savefig(os.path.join(save_dir, f'r1.png'), bbox_inches = 'tight',
-    #             pad_inches = 0.1, dpi = 300)
-
-    

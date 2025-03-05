@@ -1,3 +1,11 @@
+# coding=utf-8
+'''
+Author: shenyanqing1105 1159364090@qq.com
+Date: 2025-03-05 16:28:34
+LastEditors: shenyanqing1105 1159364090@qq.com
+LastEditTime: 2025-03-05 16:38:14
+FilePath: /ForestLPR-CVPR2025/transloc_scripts/transloc3d_utils.py
+'''
 import sys
 sys.path.append("..")
 import os
@@ -19,8 +27,7 @@ def get_latent_vectors(model, dataset, dataset_folder, cfg):
             path =  os.path.join(dataset_folder, dataset[idx]['query'])
         else:
             path =  os.path.join(dataset_folder, dataset[idx].rel_scan_filepath)
-        # path =  os.path.join(dataset_folder, dataset[idx]['query'])
-        # path = path.replace('downsampled', 'normalized')
+        path = path.replace('downsampled', 'normalized')
         pcd = o3d.io.read_point_cloud(path)
         xyz = np.asarray(pcd.points).astype(np.float32)
         tops=[]
@@ -52,8 +59,6 @@ def compute_embedding(model, pc, idx, cfg):
     return embedding
 
 def getPositives(set): # list of list
-    import ipdb
-    ipdb.set_trace()
     positives_=[]
     near_positives=[]
     for index in range(len(set)):
@@ -63,7 +68,7 @@ def getPositives(set): # list of list
 
         for i in positives:
         # for i in self.set[index].positives.tolist():
-            if abs(set[i].timestamp - set[index].timestamp) > 20: # 避免nearby 增加多样性
+            if abs(set[i].timestamp - set[index].timestamp) > 20:
                 pos.append(i)
             else:
                 near_pos.append(i)

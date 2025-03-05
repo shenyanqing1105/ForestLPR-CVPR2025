@@ -1,5 +1,13 @@
 # coding=utf-8
 '''
+Author: shenyanqing1105 1159364090@qq.com
+Date: 2025-03-05 16:28:34
+LastEditors: shenyanqing1105 1159364090@qq.com
+LastEditTime: 2025-03-05 16:35:10
+FilePath: /ForestLPR-CVPR2025/minkloc_scripts/minkloc_utils.py
+'''
+# coding=utf-8
+'''
 Author: shenyanqing
 Description: 
 '''
@@ -20,7 +28,6 @@ def get_latent_vectors(model, dataset, dataset_folder, device, params):
             path =  os.path.join(dataset_folder, dataset[idx]['query'])
         else:
             path =  os.path.join(dataset_folder, dataset[idx].rel_scan_filepath)
-        # path =  os.path.join(dataset_folder, dataset[idx]['query'])
         pcd = o3d.io.read_point_cloud(path)
         xyz = np.asarray(pcd.points).astype(np.float32)
 
@@ -37,7 +44,7 @@ def get_latent_vectors(model, dataset, dataset_folder, device, params):
     return vectors
 
 def compute_embedding(model, pc, device, params):
-    coords, _ = params.model_params.quantizer(pc) # 乘100，并量化
+    coords, _ = params.model_params.quantizer(pc)
     with torch.no_grad():
         bcoords = ME.utils.batched_coordinates([coords])
         feats = torch.ones((bcoords.shape[0], 1), dtype=torch.float32)
@@ -49,8 +56,6 @@ def compute_embedding(model, pc, device, params):
     return embedding
 
 def getPositives(set): # list of list
-    import ipdb
-    ipdb.set_trace()
     positives_=[]
     near_positives=[]
     for index in range(len(set)):
@@ -60,7 +65,7 @@ def getPositives(set): # list of list
 
         for i in positives:
         # for i in self.set[index].positives.tolist():
-            if abs(set[i].timestamp - set[index].timestamp) > 20: # 避免nearby 增加多样性
+            if abs(set[i].timestamp - set[index].timestamp) > 20:
                 pos.append(i)
             else:
                 near_pos.append(i)

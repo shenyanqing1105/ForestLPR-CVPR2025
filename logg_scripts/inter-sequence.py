@@ -126,8 +126,7 @@ def get_recall(m, n, database_feat, query_feat, database_sets, query_sets, locat
     num_evaluated = 0
 
     matrix_cost = cdist(queries_feat_run, database_feat_run)
-    import ipdb
-    ipdb.set_trace()
+
     np.save(join('../plot', "matrix_inter_{}_{}_query.npy".format(location, m+1)), queries_feat_run)
     np.save(join('../plot', "matrix_inter_{}_{}_database.npy".format(location, n+1)), database_feat_run)
     plt.figure(figsize=(20,20),dpi=150)

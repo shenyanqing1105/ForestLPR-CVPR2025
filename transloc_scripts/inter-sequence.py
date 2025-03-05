@@ -38,8 +38,6 @@ def evaluate(queries, databases, query_features, database_features, args):
         # Extract features if not provided
         query_sets = load_from_pickle(query_sets)
         database_sets = load_from_pickle(database_sets)
-        import ipdb
-        ipdb.set_trace()
         if query_feat == 'None' or database_feat == 'None':
             database_feat=[]
             query_feat=[]
@@ -133,7 +131,7 @@ def get_recall(m, n, database_feat, query_feat, database_sets, query_sets, locat
 
     matrix_cost = cdist(queries_feat_run, database_feat_run)
     plt.figure(figsize=(20,20),dpi=150)
-    plt.imshow(matrix_cost,cmap='gray_r',interpolation='nearest')#逆映射 reverse
+    plt.imshow(matrix_cost,cmap='gray_r',interpolation='nearest')# reverse
     plt.savefig(join('../plot', "matrix_inter_{}_{}_{}.png".format(location, m+1, n+1)))
     print('saving cost matrix')
 
@@ -149,7 +147,6 @@ def get_recall(m, n, database_feat, query_feat, database_sets, query_sets, locat
         # Find nearest neighbours 
         _, indices = database_nbrs.query(np.asarray([queries_feat_run[i]]), k = num_neighbours)
 
-        # 0-1图像 把对应位置标注上
         matrix_cost_GT[i,true_neighbours] = 1
 
         for j in range(len(indices[0])):

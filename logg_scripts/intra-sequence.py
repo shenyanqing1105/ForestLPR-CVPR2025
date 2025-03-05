@@ -13,7 +13,7 @@ from logg3d_utils import get_latent_vectors
 from models.pipeline_factory import get_pipeline
 import torch
 from scipy.spatial.distance import cdist
-from os.path import join, exists, isfile
+from os.path import join
 import matplotlib.pyplot as plt
 from chamferdist import ChamferDistance
 from logg3d_utils import EvalDataset
@@ -102,8 +102,7 @@ def eval_singlesession(database, embeddings, args):
             revisit = True
             gt_idx = np.argmin(dist_seen_world)
             num_revisits += 1
-            # import ipdb
-            # ipdb.set_trace()
+
         else:
             revisit = False
 
@@ -123,35 +122,12 @@ def eval_singlesession(database, embeddings, args):
                 qu = database[query_idx]['query']
                 gt = database[gt_idx]['query']
                 r1 = database[top1_idx]['query']
-                # qpcd = o3d.io.read_point_cloud(os.path.join(args.root[0], qu))
-                # xyz = np.asarray(qpcd.points).astype(np.float32)
-                # q = torch.from_numpy(xyz)
-                # qq = torch.unsqueeze(q, dim=0).cuda()
-                # gpcd = o3d.io.read_point_cloud(os.path.join(args.root[0], gt))
-                # xyz = np.asarray(gpcd.points).astype(np.float32)
-                # g = torch.from_numpy(xyz)
-                # gg = torch.unsqueeze(g, dim=0).cuda()
-                # rpcd = o3d.io.read_point_cloud(os.path.join(args.root[0], r1))
-                # xyz = np.asarray(rpcd.points).astype(np.float32)
-                # r = torch.from_numpy(xyz)
-                # rr = torch.unsqueeze(r, dim=0).cuda()
-                # if chamferDist(qq,rr, bidirectional=True) < chamferDist(qq,gg, bidirectional=True):
-                #     num_falses += 1
-                #     print(top1_world_dist)
-                # else:
-                # import ipdb
-                # ipdb.set_trace()
+
 
                 false_values_x.append(q_coord[0])
                 false_values_y.append(q_coord[1])
                 segment = [tuple(q_coord), tuple(coords[top1_idx])]
                 segments.append(segment)
-        #         # print(top1_world_dist)
-        #         # print(qu)
-        #         # print(gt)
-        #         # print(r1)
-        #         # import ipdb
-        #         # ipdb.set_trace()
 
         # Evaluate top-1 candidate 
         for thresh_idx in range(num_thresholds):
@@ -187,16 +163,13 @@ def eval_singlesession(database, embeddings, args):
 
     # plot only for false pairs
     plt.figure(figsize=(30,30),dpi=150)
-    import ipdb
-    ipdb.set_trace()
+
     for segment in segments:
         x, y = zip(*segment)
         plt.plot(x,y,marker='.', markersize=0.2, linestyle='-', linewidth=0.2, color='b')
-        # plt.scatter(*segment[0], c='yellow', s=0.5, zorder=3)
-        # plt.scatter(*segment[1], c='green', s=0.5, zorder=3)
+
     plt.savefig(join('../plot', "pair_{}.png".format(args.run_names[0].split('/')[-1])))
-    import ipdb
-    ipdb.set_trace()
+
     # Find F1Max
     F1max = 0.0 
     for thresh_idx in range(num_thresholds):

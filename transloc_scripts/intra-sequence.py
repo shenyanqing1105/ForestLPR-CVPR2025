@@ -21,9 +21,7 @@ import faiss
 def eval_singlesession(database, embeddings, args):
     # Get embeddings, timestamps,coords and start time
     database = load_from_pickle(database)
-    # if embeddings != None:
-    #     embeddings = load_from_pickle(embeddings)
-    # else:
+
     cfg = Config.fromfile(args.config)
     if args.quan_size:
         cfg.model_cfg.quantization_size = args.quan_size
@@ -51,11 +49,9 @@ def eval_singlesession(database, embeddings, args):
         print('====> Calculating recall @ N [1,5,10,20,100]')
 
         _, predictions = faiss_index.search(
-            qFeat, max(n_values))  # 按序 idx
+            qFeat, max(n_values))
         gt, values = getPositives(database)
-        # import ipdb
-        # ipdb.set_trace()
-        # 仅仅保留回环 只关心再次来到这里的情况下的表现
+
         for qIx, pred in enumerate(predictions):
             indexes = np.where(np.isin(pred, values[qIx]))[0]
             rest_elements = np.delete(pred,indexes)
@@ -67,19 +63,12 @@ def eval_singlesession(database, embeddings, args):
                 gt[qIx] = predictions[qIx].tolist()
         metrics = Recall_at_N(predictions,gt)
         return metrics
-    # matrix_cost = cdist(embeddings, embeddings)
-    # plt.figure(figsize=(20,20),dpi=150)
-    # plt.imshow(matrix_cost,cmap='gray_r',interpolation='nearest')
-    # plt.savefig(join('../plot', "matrix_intra_{}.png".format(args.run_names[0].split('/')[-1])))
-    # print('saving cost matrix')
+
     timestamps = [query_to_timestamp(database[k]['query']) for k in range(len(database.keys()))]
     # world distance matrix
     coords = np.array([[database[k]['easting'], database[k]['northing']] for k in range(len(database.keys()))])
     # matrix_cost = cdist(coords, coords)
     # matrix_cost = [[500 if element > args.world_thresh else element for element in row] for row in matrix_cost]
-    # plt.figure(figsize=(20,20),dpi=150)
-    # plt.imshow(matrix_cost,cmap='gray_r',interpolation='nearest')
-    # plt.savefig(join('../plot', "matrix_intra_GT_{}.png".format(args.run_names[0].split('/')[-1])))
     print('saving GT matrix')
     start_time = timestamps[0]
 
@@ -131,12 +120,10 @@ def eval_singlesession(database, embeddings, args):
             revisit = True 
             gt_idx = np.argmin(dist_seen_world)
             num_revisits += 1
-            # import ipdb
-            # ipdb.set_trace()
         else:
             revisit = False 
 
-        # Get top-1 candidate and distances in real world, embedding space 一定找一个top1（只要满足时间要求）
+        # Get top-1 candidate and distances in real world, embedding space
         top1_idx = np.argmin(dist_seen_embedding)
         top1_embed_dist = dist_seen_embedding[top1_idx]
         top1_world_dist = dist_seen_world[top1_idx]
@@ -149,7 +136,7 @@ def eval_singlesession(database, embeddings, args):
             segment = [tuple(q_coord), tuple(coords[top1_idx])]
             segmentsT.append(segment)
         else:
-            if revisit and top1_world_dist < 15:#GT里有满足条件的
+            if revisit and top1_world_dist < 15:
                 qu = database[query_idx]['query']
                 gt = database[gt_idx]['query']
                 r1 = database[top1_idx]['query']
@@ -157,12 +144,7 @@ def eval_singlesession(database, embeddings, args):
                 false_values_y.append(q_coord[1])
                 segment = [tuple(q_coord), tuple(coords[top1_idx])]
                 segments.append(segment)
-                # print(top1_world_dist)
-                # print(qu)
-                # print(gt)
-                # print(r1)
-                # import ipdb
-                # ipdb.set_trace()
+
 
         # Evaluate top-1 candidate 
         for thresh_idx in range(num_thresholds):
@@ -189,11 +171,6 @@ def eval_singlesession(database, embeddings, args):
     x_values = [float(item) for item in x_values]
     y_values = df['y'].values.tolist()
     y_values = [float(item) for item in y_values]
-    # plt.figure(figsize=(20,20),dpi=150)
-    # plt.plot(x_values, y_values, marker='.', markersize=0.1, linestyle='-', color='b')
-    # plt.plot(correct_values_x, correct_values_y, linestyle='', marker='o', markersize=0.5, color='r')
-    # plt.plot(false_values_x, false_values_y, linestyle='', marker='o', markersize=0.5, color='y')
-    # plt.savefig(join('../plot', "path_{}.png".format(args.run_names[0].split('/')[-1])))
 
     # # plot only for false pairs
     plt.figure(figsize=(30,30),dpi=150)
@@ -201,16 +178,7 @@ def eval_singlesession(database, embeddings, args):
     for segment in segments:
         x, y = zip(*segment)
         plt.plot(x,y,marker='.', markersize=1, linestyle='-', linewidth=1, color='r')
-        # plt.scatter(*segment[0], c='yellow', s=0.5, zorder=3)
-        # plt.scatter(*segment[1], c='green', s=0.5, zorder=3)
-    # for segment in segmentsT:
-    #     x, y = zip(*segment)
-    #     plt.plot(x,y,marker='.', markersize=0.3, linestyle='-', linewidth=0.3, color='r')
-    #     plt.scatter(*segment[0], c='yellow', s=0.5, zorder=3)
-    #     plt.scatter(*segment[1], c='green', s=0.5, zorder=3)
     plt.savefig(join('../plot', "pair_{}.png".format(args.run_names[0].split('/')[-1])))
-    import ipdb
-    ipdb.set_trace()
     # Find F1Max
     F1max = 0.0 
     for thresh_idx in range(num_thresholds):
