@@ -1,3 +1,4 @@
+
 # ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images
 
 The code is almost there. Don't ask, we don't know either. Good luck!😉 [kidding]
@@ -6,12 +7,10 @@ The code is almost there. Don't ask, we don't know either. Good luck!😉 [kiddi
 
 - arxiv version upload and insert the link
 - toc
-- data upload and insert the link (ANYmal dataset, botanic dataset; pickle files; npy files)
-- checkpoint upload and insert the link (single , multi)
 
-`source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images]()`
+source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images]()
 
-`<img src="https://github.com/user-attachments/assets/21c49ddd-6f88-4237-bfe9-ef78bcd0e39c" width="400px">`
+<img src="https://github.com/user-attachments/assets/21c49ddd-6f88-4237-bfe9-ef78bcd0e39c" width="400px">
 
 ## Table of Contents
 
@@ -36,9 +35,11 @@ conda deactivate
 
 ## Required Submap Data
 
-We use two public datasets and one own-collected dataset: [Wild-Places](https://github.com/csiro-robotics/Wild-Places), [Botanic Garden Dataset](https://github.com/robot-pesg/BotanicGarden), and [ANYmal](). For [Botanic](), we repurpose the dataset and use GT to register multiple frames to 1 submap. These submaps should be placed in `Clouds_downsampled`
+We use two public datasets and one own-collected dataset: [Wild-Places](https://github.com/csiro-robotics/Wild-Places), [Botanic Garden Dataset](https://github.com/robot-pesg/BotanicGarden), and ANYmal dataset. Additionally, in our work, we have processed the datasets into cropped point clouds `Cloud_normalized`, `pickle` files and BEV density images `.npy` files, which is more convenient to test the BEV-based methods.
 
-Additionally, in our work, we have processed the datasets into cropped point clouds [Cloud_normalized]() and BEV density images [download](), which is more convenient to test the BEV-based methods.
+For [Botanic](https://www.123865.com/s/tp6jTd-jGFbh?提取码:MPTw), and [ANYmal](https://www.123865.com/s/tp6jTd-6GFbh?提取码:6hXL), we repurpose the dataset and use GT to register multiple frames to 1 submap.
+
+For [Wild-Places](https://www.123865.com/s/tp6jTd-TPFbh?提取码:s0u3), we provide the additional processed files, and the data should be merged based on the sequences.
 
 Environment visualization
 ![environments](https://github.com/user-attachments/assets/e799831c-b655-49e8-b4dd-0c4ca00539dc)
@@ -55,7 +56,7 @@ $_PATH_TO_DATASET/
 |	|	    └── poses_aligned.csv
 |   └── testing/
 |	    ├── 3-02.pickle
-|	    └── npy files
+|	    └── .npy files
 ├── botanic/    # Dataset
 |   ├── 1005-03/  # Environment
 |	│   └── 02/   # Sequence
@@ -67,7 +68,7 @@ $_PATH_TO_DATASET/
 |   └── testing/
 |	    ├── 5-03.pickle
 |	    ├── 5-06.pickle
-|	    └── npy files
+|	    └── .npy files
 └── Wild-Places/
     ├── Karawatha/
     |	├── K-01/
@@ -87,11 +88,11 @@ $_PATH_TO_DATASET/
     |	├── V-04.pickle
     |	├── K-03.pickle
     |	├── V-03.pickle
-    |	└── npy files
+    |	└── .npy files
     ├── training/
     |	├── training_wild-places.pickle
     |	├── testing_wild-places.pickle
-    |	└── npy files
+    |	└── .npy files
     └── Venman/
             ├── V-01/
             ├── V-02/
@@ -246,32 +247,32 @@ python -W ignore train.py --img_size 480 480 --level 1 6 11 --agg gem --depth 12
 
 ## Model Testing
 
-Download the trained checkpoint on Wild-Places from XXX[url](), put it into `$HOME/ForestLPR/runs`, and run the following script to evaluate it.
+Download the trained model on Wild-Places from [checkpoints](https://www.123865.com/s/tp6jTd-yGFbh?提取码:ZM3W), put it into `$HOME/ForestLPR/runs/forestlpr`, and run the following script to evaluate it.
 
 Change dataset file path in bevwp.py
 
 **Wild-Places inter-evaluation**
 
 ```shell
-python -W ignore eval.py --img_size 480 480 --cacheBatchSize 6 --resume ./runs/forestlpr/model_best.pth.tar --level 1 6 11 --dataset inter --subset Karawatha
+python -W ignore eval.py --img_size 480 480 --cacheBatchSize 6 --resume ./runs/forestlpr/checkpoints/model_best.pth.tar --level 1 6 11 --dataset inter --subset Karawatha
 ```
 
 **Wild-Places intra-evaluation**
 
 ```shell
-python -W ignore eval.py --img_size 480 480 --cacheBatchSize 12 --resume ./runs/forestlpr/model_best.pth.tar --level 1 6 11 --dataset intra --subset V-03 --world_thresh 3 --time_thresh 600
+python -W ignore eval.py --img_size 480 480 --cacheBatchSize 12 --resume ./runs/forestlpr/checkpoints/model_best.pth.tar --level 1 6 11 --dataset intra --subset V-03 --world_thresh 3 --time_thresh 600
 ```
 
 **Botanic intra-evaluation**
 
 ```shell
-python -W ignore eval.py --img_size 480 480 --cacheBatchSize 12 --resume ./runs/forestlpr/model_best.pth.tar --level 1 6 11 --dataset intra --subset 5-03 --world_thresh 3 --time_thresh 100
+python -W ignore eval.py --img_size 480 480 --cacheBatchSize 12 --resume ./runs/forestlpr/checkpoints/model_best.pth.tar --level 1 6 11 --dataset intra --subset 5-03 --world_thresh 3 --time_thresh 100
 ```
 
 **Anymal intra-evaluation**
 
 ```shell
-python -W ignore eval.py --img_size 480 480 --cacheBatchSize 12 --resume ./runs/forestlpr/model_best.pth.tar --level 1 6 11 --dataset intra --subset 3-02 --world_thresh 3 --time_thresh 100
+python -W ignore eval.py --img_size 480 480 --cacheBatchSize 12 --resume ./runs/forestlpr/checkpoints/model_best.pth.tar --level 1 6 11 --dataset intra --subset 3-02 --world_thresh 3 --time_thresh 100
 ```
 
 ## Baselines Testing
@@ -295,8 +296,8 @@ Download the original code (or use git submodule) and the added  xx_ `script `fo
 Note: the `cfg.model_cfg.quantization_size` has been changed compared with reproduction in Wild-Places, for better performance.
 
 ```
-cd scriptsig ../configs/transloc3d_baseline_cfg.py --databases <PATH_DATASET>/Wild-Places/testing/K-04.pickle --run_names Karawatha/K-04 --save_dir ../dataset/Wild-Places/testing/ --database_featu
-python intra-sequence.py --confres None --root <PATH_DATASET>/Wild-Places --quan_size 1
+cd scriptsig ../configs/transloc3d_baseline_cfg.py --databases $_PATH_TO_DATASET/Wild-Places/testing/K-04.pickle --run_names Karawatha/K-04 --save_dir ../dataset/Wild-Places/testing/ --database_featu
+python intra-sequence.py --confres None --root $_PATH_TO_DATASET/Wild-Places --quan_size 1
 ```
 
 `quan_size` is used to set `cfg.model_cfg.quantization_size`
@@ -305,14 +306,14 @@ python intra-sequence.py --confres None --root <PATH_DATASET>/Wild-Places --quan
 
 ```
 cd scripts
-python intra-sequence.py --databases <PATH_DATASET>/botanic/testing/5-03.pickle --run_names 1005-03/02 --save_dir ../dataset/botanic/testing/ --database_features None --root <PATH_DATASET>/botanic --time_thresh 100 --world_thresh 3
+python intra-sequence.py --databases $_PATH_TO_DATASET/botanic/testing/5-03.pickle --run_names 1005-03/02 --save_dir ../dataset/botanic/testing/ --database_features None --root $_PATH_TO_DATASET/botanic --time_thresh 100 --world_thresh 3
 ```
 
 **Logg3D-Net** on Wild-Places, inter
 
 ```
 cd scripts
-python inter-sequence.py --databases <PATH_DATASET>/Wild-Places/testing/Venman_evaluation_database.pickle --queries <PATH_DATASET>/Wild-Places/testing/Venman_evaluation_query.pickle --location_names Venman --query_features None --database_features None --root <PATH_DATASET>/Wild-Places
+python inter-sequence.py --databases $_PATH_TO_DATASET/Wild-Places/testing/Venman_evaluation_database.pickle --queries $_PATH_TO_DATASET/Wild-Places/testing/Venman_evaluation_query.pickle --location_names Venman --query_features None --database_features None --root $_PATH_TO_DATASET/Wild-Places
 ```
 
 **MinkLoc3Dv2** on ANYmal, intra
@@ -321,8 +322,8 @@ use `v2` configuration
 
 ```
 cd scripts
-python intra-sequence.py --databases <PATH_DATASET>/anymal/testing/3-02.pickle --run_names anymal/03-2 --save_dir ../dataset/Wild-Places/testing/ --database_fe
-atures None --root <PATH_DATASET>/anymal --config ../config/config_baseline_v2.txt --model_config ../models/minkloc3dv2.txt --weights ../checkpoints/MinkLoc3Dv2.pth --world_thresh 3 --time_thresh 100
+python intra-sequence.py --databases $_PATH_TO_DATASET/anymal/testing/3-02.pickle --run_names anymal/03-2 --save_dir ../dataset/Wild-Places/testing/ --database_fe
+atures None --root $_PATH_TO_DATASET/anymal --config ../config/config_baseline_v2.txt --model_config ../models/minkloc3dv2.txt --weights ../checkpoints/MinkLoc3Dv2.pth --world_thresh 3 --time_thresh 100
 ```
 
 ### 2D Methods
