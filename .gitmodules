@@ -6,3 +6,6 @@
 	path = MinkLoc3Dv2
 	url = https://github.com/jac99/MinkLoc3D
 
+[submodule "LoGG3D-net"]
+	path = LoGG3D-net
+	url = https://github.com/csiro-robotics/LoGG3D-Net

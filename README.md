@@ -6,11 +6,12 @@ The code is almost there. Don't ask, we don't know either. Good luck!😉 [kiddi
 
 - arxiv version upload and insert the link
 - toc
-- data upload and insert the link
-- checkpoint upload and insert the link
-  source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images]()
+- data upload and insert the link (ANYmal dataset, botanic dataset; pickle files; npy files)
+- checkpoint upload and insert the link (single , multi)
 
-<img src="https://github.com/user-attachments/assets/21c49ddd-6f88-4237-bfe9-ef78bcd0e39c" width="400px">
+`source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images]()`
+
+`<img src="https://github.com/user-attachments/assets/21c49ddd-6f88-4237-bfe9-ef78bcd0e39c" width="400px">`
 
 ## Table of Contents
 
@@ -281,7 +282,9 @@ Here we provide the Code of Baselines for testing Wild-Places, helping others re
 
 [LOGG3D-Net](https://www.dropbox.com/s/h1ic00tvfnstvfm/LoGG3D-Net.pth?dl=0)
 
-[BevPlace]()
+[MinkLOc3Dv2](https://www.dropbox.com/s/8ijq9h99m1snzxn/MinkLoc3Dv2.pth?dl=0)
+
+[BevPlace](https://drive.google.com/file/d/1AhCAhI70CVfwioMSOumiCFlUuF9-0WYP/view?usp=sharing)
 
 ### 3D Methods
 
