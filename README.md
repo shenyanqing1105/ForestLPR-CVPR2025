@@ -4,9 +4,9 @@
 
 ### TODO
 
-- [ ] upload arxiv version and insert the link belows
+- [ ] 
 
-source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images]()
+source code of our CVPR'25 paper [ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images](https://arxiv.org/pdf/2503.04475)
 
 <img src="https://github.com/user-attachments/assets/21c49ddd-6f88-4237-bfe9-ef78bcd0e39c" width="400px">
 
