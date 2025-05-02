@@ -405,7 +405,7 @@ If you find the repo useful, please consider citing our paper:
 ```
 @inproceedings{forestlpr,
   title={ForestLPR: LiDAR Place Recognition in Forests Attentioning Multiple BEV Density Images},
-  author={Shen, Yanqing and Tuna, Turcan and Cadena, Cesar and Hutter, Marco and Zheng, Nanning},
+  author={Shen, Yanqing and Tuna, Turcan and Hutter, Marco and Cadena, Cesar and Zheng, Nanning},
   booktitle={IEEE Conference on Computer Vision and Pattern Recognition},
   year={2025}
 }
