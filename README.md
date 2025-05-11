@@ -146,14 +146,15 @@ $HOME/ForestLPR
     |   |	├── mc_eval_config_anymal.yaml
     |   |	├── mc_eval_config_botanic.yaml
     |	|	└── mc_eval_config_wp.yaml
-    |	└── scan_context/
+    |	├── scan_context/
     |   |	├── sc_inter_sequence.py
     |   |	├── sc_intra_sequence.py
     |   |	├── sc_utils.py
     |   |	├── sc_eval_config_anymal.yaml
     |   |	├── sc_eval_config_botanic.yaml
     |		└── sc_eval_config_wp.yaml
-    |	generate_splits/
+    |	└── utils.py
+    ├── generate_splits/
     |   ├── bevwp.py    # dataloader of ForestLPR
     |   ├── ground_filter.py    # point-cloud preprocessing: ground segmentation and height offset removal
     |   ├── merge.py    # generating the submaps from original LiDAR scans
