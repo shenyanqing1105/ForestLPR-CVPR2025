@@ -53,9 +53,9 @@ conda deactivate
 
 We use two public datasets and one own-collected dataset: [Wild-Places](https://github.com/csiro-robotics/Wild-Places), [Botanic Garden Dataset](https://github.com/robot-pesg/BotanicGarden), and ANYmal dataset. Additionally, in our work, we have processed the datasets into cropped point clouds `Cloud_normalized`, `pickle` files and BEV density images `.npy` files, which is more convenient to test the BEV-based methods.
 
-For [Botanic](https://www.123865.com/s/tp6jTd-jGFbh?提取码:MPTw), and [ANYmal](https://www.123865.com/s/tp6jTd-6GFbh?提取码:6hXL), we repurpose the dataset and use GT to register multiple frames to 1 submap.
+For [Botanic-code: MPTw](https://www.123865.com/s/tp6jTd-jGFbh?提取码:MPTw), and [ANYmal-code: 6hXL](https://www.123865.com/s/tp6jTd-6GFbh?提取码:6hXL), we repurpose the dataset and use GT to register multiple frames to 1 submap.
 
-For [Wild-Places](https://www.123865.com/s/tp6jTd-TPFbh?提取码:s0u3), we provide the additional processed files, and the data should be merged based on the sequences. [sorry for missing some pickle files, we upload them directly to the repo :)]
+For [Wild-Places-code: s0u3](https://www.123865.com/s/tp6jTd-TPFbh?提取码:s0u3), we provide the additional processed files, and the data should be merged based on the sequences. [sorry for missing some pickle files, we upload them directly to the repo :)]
 
 Environment visualization
 ![environments](https://github.com/user-attachments/assets/e799831c-b655-49e8-b4dd-0c4ca00539dc)
